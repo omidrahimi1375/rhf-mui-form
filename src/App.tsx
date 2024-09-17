@@ -1,12 +1,11 @@
-function App() {
-  return (
-    <>
-      <h1>Vite + React</h1>
-      <p className="read-the-docs">Click on the Vite and React logos to learn more</p>
-        <div>
+import type { ReactElement } from "react";
+import { Stack } from "@mui/material";
 
-        </div>
-    </>
+function App(): ReactElement {
+  return (
+    <Stack>
+      <h1>MUI Form</h1>
+    </Stack>
   );
 }
 
