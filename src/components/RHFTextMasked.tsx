@@ -1,6 +1,6 @@
 import type { Control, FieldValues, Path } from "react-hook-form";
 import { Controller, useFormContext } from "react-hook-form";
-import type { TextFieldProps } from "@mui/material";
+import type { InputBaseComponentProps, TextFieldProps } from "@mui/material";
 import { TextField } from "@mui/material";
 import type { ReactElement } from "react";
 import { forwardRef } from "react";
@@ -11,11 +11,10 @@ type Props<T extends FieldValues> = Omit<TextFieldProps, "name"> & {
   readonly name: Path<T>;
   readonly control?: Control<T>;
   readonly maskOptions?: ReactMaskOpts;
+  readonly inputDir?: "ltr" | "rtl";
 };
 
-interface TextMaskInputProps {
-  readonly onChange: (event: { target: { name: string; value: string } }) => void;
-  readonly name: string;
+interface TextMaskInputProps extends InputBaseComponentProps {
   readonly maskOptions?: ReactMaskOpts;
 }
 
@@ -23,17 +22,16 @@ const TextMaskInput = forwardRef<HTMLInputElement, TextMaskInputProps>(function 
   props: TextMaskInputProps,
   ref
 ) {
-  const { onChange, maskOptions, ...other } = props;
+  const { maskOptions, ...other } = props;
 
   return (
     <IMaskInput
       {...maskOptions}
       {...other}
       inputRef={ref}
-      onAccept={(value: unknown) => {
-        onChange({ target: { name: props.name, value: value as string } });
-      }}
-      overwrite={true}
+      // onAccept={(value: unknown) => {
+      //   onChange({ target: { name: props.name, value: value as string } });
+      // }}
     />
   );
 });
@@ -42,6 +40,7 @@ export default function RHFTextMasked<T extends FieldValues>({
   name,
   control,
   maskOptions,
+  inputDir = "rtl",
   ...props
 }: Props<T>): ReactElement {
   const formContext = useFormContext<T>();
@@ -58,14 +57,23 @@ export default function RHFTextMasked<T extends FieldValues>({
           helperText={error?.message}
           value={value ?? ""}
           {...field}
+          inputProps={{
+            ...props.inputProps,
+            style: {
+              direction: inputDir,
+              ...props.inputProps?.style
+            }
+          }}
           InputProps={{
             ...props.InputProps,
-            // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-            // @ts-expect-error
             inputComponent: TextMaskInput,
             inputProps: {
               ...props.InputProps?.inputProps,
-              ...maskOptions
+              style: {
+                direction: inputDir,
+                ...props.InputProps?.inputProps?.style
+              },
+              maskOptions
             }
           }}
         />
