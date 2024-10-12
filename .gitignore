@@ -23,7 +23,7 @@ dist-ssr
 *.sln
 *.sw?
 
-# Yarn (when not using Zero-Installs)
+# Yarn not using Zero-Installs
 .pnp.*
 .yarn/*
 !.yarn/patches
@@ -31,7 +31,3 @@ dist-ssr
 !.yarn/releases
 !.yarn/sdks
 !.yarn/versions
-
-# Environment Variables
-.env
-.env.yarn
