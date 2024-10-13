@@ -16,9 +16,11 @@ type Props<T extends FieldValues> = Omit<TextFieldProps, "name"> & {
 };
 
 /**
- * `RHFTextField` is a wrapper around MIUI's `TextField` that integrates with React Hook Form.
- * - It only works with controlled fields in React Hook Form (RHF).
+ * `RHFTextField` is a wrapper around MIUI's `TextField` component that integrates with React Hook Form.
+ * It only works with controlled fields in React Hook Form (RHF).
+ *
  * - The component can either receive the RHF control as a prop or use `useFormContext` to automatically access the form control.
+ * - It supports optional `inputDir` to set the text direction (`ltr` or `rtl`), and the `isReadOnly` prop to make the input read-only.
  *
  * @template T - A generic type for the form's field values, extending `FieldValues`.
  *
@@ -28,7 +30,28 @@ type Props<T extends FieldValues> = Omit<TextFieldProps, "name"> & {
  * @param {boolean} [isReadOnly] - Specifies whether the input is read-only.
  * @param {TextFieldProps} props - Additional props passed to the underlying MUI `TextField`.
  *
- * @returns A controlled `TextField` component integrated with React Hook Form.
+ * @returns {ReactElement} A controlled `TextField` component integrated with React Hook Form.
+ *
+ * @example
+ * ```tsx
+ * <RHFTextField
+ *   name="firstName"
+ *   label="First Name"
+ *   control={control} // Optional, if useFormContext is not used
+ *   inputDir="ltr"
+ *   isReadOnly={false}
+ * />
+ * ```
+ *
+ * @example
+ * ```tsx
+ * <RHFTextField
+ *   name="email"
+ *   label="Email Address"
+ *   isReadOnly
+ *   inputDir="rtl"
+ * />
+ * ```
  */
 export default function RHFTextField<T extends FieldValues>({
   name,
