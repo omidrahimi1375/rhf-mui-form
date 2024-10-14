@@ -5,7 +5,7 @@ import { Chip, Stack } from "@mui/material";
 
 interface Props {
   readonly options: Record<string, SelectOption>;
-  readonly selected: string | string[];
+  readonly selected: string[];
   readonly maxHeight: number | undefined;
   readonly inputDir: "ltr" | "rtl" | undefined;
 }
@@ -16,10 +16,6 @@ interface ChipsProps {
 }
 
 function Chips({ options, selected }: ChipsProps): ReactElement | ReactElement[] {
-  if (typeof selected === "string") {
-    return <Chip key={selected} label={options[selected].label} />;
-  }
-
   return selected.map((s) => {
     return <Chip key={s} label={options[s].label} />;
   });
