@@ -8,16 +8,15 @@ import type { ReactElement } from "react";
 import { useMemo } from "react";
 import objectHash from "object-hash";
 import SelectRenderValue from "./components/SelectRenderValue.tsx";
+import type { NotUndefined, SelectOptionBase } from "./types.ts";
 
-type NotUndefined = object | string | number | boolean | null | NotUndefined[];
-
-interface OptionItem {
-  /** The label displayed for the option */
-  label: string;
+/**
+ * Interface defining the structure of an option item in the select field.
+ * @extends SelectOptionBase - Base interface for the select options.
+ */
+interface OptionItem extends SelectOptionBase {
   /** The value of the option, which can be any type */
   value: NotUndefined;
-  /** Optional flag to disable the option */
-  disabled?: boolean;
 }
 
 type Props<T extends FieldValues> = Omit<SelectProps, "name"> & {

@@ -1,10 +1,10 @@
 import type { ReactElement } from "react";
 import { memo } from "react";
-import type { SelectOption } from "../types.ts";
+import type { SelectOptionBase } from "../types.ts";
 import { Chip, Stack } from "@mui/material";
 
 interface Props {
-  readonly options: Record<string, SelectOption>;
+  readonly options: Record<string, SelectOptionBase>;
   readonly selected: string[];
   readonly maxHeight: number | undefined;
   readonly inputDir: "ltr" | "rtl" | undefined;

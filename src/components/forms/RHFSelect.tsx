@@ -1,23 +1,20 @@
 import type { Control, FieldValues, Path } from "react-hook-form";
-import { useWatch } from "react-hook-form";
 import { Controller, useFormContext } from "react-hook-form";
 import type { SelectProps } from "@mui/material";
 import { Checkbox, MenuItem } from "@mui/material";
 import { FormControl, FormHelperText, InputLabel, Select } from "@mui/material";
 import type { ReactElement } from "react";
 import { useMemo } from "react";
-import objectHash from "object-hash";
 import SelectRenderValue from "./components/SelectRenderValue.tsx";
+import type { SelectOptionBase } from "./types.ts";
 
-type NotUndefined = object | string | number | boolean | null | NotUndefined[];
-
-interface OptionItem {
-  /** The label displayed for the option */
-  label: string;
-  /** The value of the option, which can be any type */
-  value: NotUndefined;
-  /** Optional flag to disable the option */
-  disabled?: boolean;
+/**
+ * Interface defining the structure of an option item in the select field.
+ * @extends SelectOptionBase - Base interface for the select options.
+ */
+interface OptionItem extends SelectOptionBase {
+  /** The value of the option, which is used as the key */
+  value: string;
 }
 
 type Props<T extends FieldValues> = Omit<SelectProps, "name"> & {
@@ -91,50 +88,35 @@ export default function RHFSelect<T extends FieldValues>({
   ...props
 }: Props<T>): ReactElement {
   const formContext = useFormContext<T>();
-  const rhfValue: string | string[] | undefined = useWatch({ control: control ?? formContext.control, name });
 
   const isMultiple = useMemo(() => {
     return props.multiple === true;
   }, [props.multiple]);
 
-  const hashedOptions = useMemo(() => {
+  const innerOptions = useMemo(() => {
     const result: Record<string, OptionItem> = {};
 
     for (const o of options) {
-      result[objectHash(o.value)] = o;
+      result[o.value] = o;
     }
 
     return result;
   }, [options]);
 
-  const hashedValue: string | string[] = useMemo(() => {
-    if (rhfValue === undefined) {
-      return isMultiple ? [] : "";
-    }
-
-    return isMultiple ? (rhfValue as string[]).map((s) => objectHash(s)) : objectHash(rhfValue);
-  }, [isMultiple, rhfValue]);
-
   return (
     <Controller
       name={name}
       control={control ?? formContext.control}
-      render={({ field: { value: _, onChange, ...field }, fieldState: { error } }) => {
+      render={({ field: { value, ...field }, fieldState: { error } }) => {
         return (
           <FormControl fullWidth={true} disabled={props.disabled} error={error !== undefined}>
             <InputLabel>{props.label}</InputLabel>
             <Select
               {...props}
               error={error !== undefined}
-              value={hashedValue}
+              // eslint-disable-next-line @typescript-eslint/prefer-nullish-coalescing
+              value={value === undefined ? (isMultiple ? [] : "") : value}
               {...field}
-              onChange={(event) => {
-                onChange(
-                  isMultiple
-                    ? (event.target.value as string[]).map((v) => hashedOptions[v].value)
-                    : hashedOptions[event.target.value as string].value
-                );
-              }}
               MenuProps={{
                 ...props.MenuProps,
                 slotProps: {
@@ -158,8 +140,8 @@ export default function RHFSelect<T extends FieldValues>({
                   : isMultiple
                     ? (s) => (
                         <SelectRenderValue
-                          options={hashedOptions}
-                          selected={s as string | string[]}
+                          options={innerOptions}
+                          selected={s as string[]}
                           maxHeight={maxHeight}
                           inputDir={inputDir}
                         />
@@ -168,13 +150,13 @@ export default function RHFSelect<T extends FieldValues>({
               }
             >
               {isMultiple
-                ? Object.entries(hashedOptions).map(([hash, option]) => (
+                ? Object.entries(innerOptions).map(([hash, option]) => (
                     <MenuItem value={hash} key={hash} disabled={option.disabled} dir={inputDir}>
-                      <Checkbox checked={hashedValue.includes(hash)} />
+                      <Checkbox checked={(value as string[]).includes(hash)} />
                       {option.label}
                     </MenuItem>
                   ))
-                : Object.entries(hashedOptions).map(([hash, option]) => (
+                : Object.entries(innerOptions).map(([hash, option]) => (
                     <MenuItem value={hash} key={hash} disabled={option.disabled} dir={inputDir}>
                       {option.label}
                     </MenuItem>
