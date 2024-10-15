@@ -95,6 +95,8 @@ export default function RHFAutoComplete<T extends FieldValues>({
 }: Props<T>): ReactElement {
   const formContext = useFormContext<T>();
 
+  // TODO: Complete maxHeight, dropDownMaxHeight and inputDir
+
   const innerOptions = useMemo(() => {
     const result: Record<string, OptionItem> = {};
 
