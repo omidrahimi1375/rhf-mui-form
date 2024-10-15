@@ -22,13 +22,38 @@ export default defineConfig({
     rollupOptions: {
       // make sure to externalize deps that shouldn't be bundled
       // into your library
-      external: ["react", "react-dom"],
+      external: [
+        "@emotion/react",
+        "@emotion/styled",
+        "@hookform/resolvers",
+        "@mui/material",
+        "@mui/x-date-pickers",
+        "date-fns-jalali",
+        "react",
+        "react-dom",
+        "react-hook-form",
+        "react-imask",
+        "stylis",
+        "stylis-plugin-rtl",
+        "zod"
+      ],
       output: {
         // Provide global variables to use in the UMD build
         // for externalized deps
         globals: {
+          "@emotion/react": "EmotionReact",
+          "@emotion/styled": "EmotionStyled",
+          "@hookform/resolvers": "HookFormResolvers",
+          "@mui/material": "MuiMaterial",
+          "@mui/x-date-pickers": "MuiXDatePickers",
+          "date-fns-jalali": "DateFnsJalali",
           react: "React",
-          "react-dom": "ReactDOM"
+          "react-dom": "ReactDOM",
+          "react-hook-form": "ReactHookForm",
+          "react-imask": "ReactImask",
+          stylis: "Stylis",
+          "stylis-plugin-rtl": "StylisPluginRtl",
+          zod: "Zod"
         }
       }
     }
