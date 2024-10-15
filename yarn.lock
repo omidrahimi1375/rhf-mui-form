@@ -207,7 +207,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@babel/runtime@npm:^7.12.5, @babel/runtime@npm:^7.18.3, @babel/runtime@npm:^7.25.6, @babel/runtime@npm:^7.25.7, @babel/runtime@npm:^7.5.5, @babel/runtime@npm:^7.8.7":
+"@babel/runtime@npm:^7.12.5, @babel/runtime@npm:^7.18.3, @babel/runtime@npm:^7.21.0, @babel/runtime@npm:^7.25.6, @babel/runtime@npm:^7.25.7, @babel/runtime@npm:^7.5.5, @babel/runtime@npm:^7.8.7":
   version: 7.25.7
   resolution: "@babel/runtime@npm:7.25.7"
   dependencies:
@@ -1088,7 +1088,7 @@ __metadata:
     "@types/react-dom": "npm:^18.3.1"
     "@types/stylis": "npm:^4.2.6"
     "@vitejs/plugin-react": "npm:^4.3.2"
-    date-fns-jalali: "npm:^2.22.0-0"
+    date-fns-jalali: "npm:^2.30.0-0"
     eslint: "npm:^9.12.0"
     globals: "npm:^15.11.0"
     object-hash: "npm:^3.0.0"
@@ -2271,10 +2271,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"date-fns-jalali@npm:^2.22.0-0":
-  version: 2.22.0-0
-  resolution: "date-fns-jalali@npm:2.22.0-0"
-  checksum: 10c0/58bab2b5bedef88256d50b07d65b5e5308f286d9e43de5839bd2796226b0a32b78b9ef7a5c86674f4b97247f39ea64944cd35f0c3ed8a9bc8dddfcbe8893f8e3
+"date-fns-jalali@npm:^2.30.0-0":
+  version: 2.30.0-0
+  resolution: "date-fns-jalali@npm:2.30.0-0"
+  dependencies:
+    "@babel/runtime": "npm:^7.21.0"
+  checksum: 10c0/6e5e98e15a54e49abec2601463739c405a4e218ef5c6a22a544cb35ab7f5598cc2d0cccff299839db7e9e3e82e5c461d23764800d36fb5f87a25558d3f8fb095
   languageName: node
   linkType: hard
 
