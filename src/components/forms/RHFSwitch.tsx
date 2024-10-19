@@ -62,7 +62,7 @@ export default function RHFSwitch<T extends FieldValues>({ name, label, control,
       name={name}
       control={control ?? formContext.control}
       render={({ field: { value, onChange, ...field }, fieldState: { error } }) => (
-        <FormControl error={error !== undefined}>
+        <FormControl error={props.disabled !== true && error !== undefined}>
           <FormControlLabel
             control={
               <Switch
@@ -76,7 +76,7 @@ export default function RHFSwitch<T extends FieldValues>({ name, label, control,
             }
             label={label}
           />
-          <FormHelperText>{error?.message ?? " "}</FormHelperText>
+          <FormHelperText>{props.disabled !== true && error !== undefined ? error.message : " "}</FormHelperText>
         </FormControl>
       )}
     />

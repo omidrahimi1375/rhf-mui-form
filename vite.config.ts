@@ -6,7 +6,13 @@ import dts from "vite-plugin-dts";
 // https://vitejs.dev/config/
 export default defineConfig({
   base: "./",
-  plugins: [dts({ rollupTypes: true }), react()],
+  plugins: [
+    dts({
+      rollupTypes: true,
+      tsconfigPath: "./tsconfig.app.json"
+    }),
+    react()
+  ],
   build: {
     emptyOutDir: true,
     sourcemap: true,
@@ -23,6 +29,7 @@ export default defineConfig({
       // make sure to externalize deps that shouldn't be bundled
       // into your library
       external: [
+        /node_modules/,
         "@emotion/react",
         "@emotion/styled",
         "@hookform/resolvers",
@@ -30,6 +37,7 @@ export default defineConfig({
         "@mui/x-date-pickers",
         "date-fns-jalali",
         "react",
+        "react/jsx-runtime",
         "react-dom",
         "react-hook-form",
         "react-imask",
@@ -49,6 +57,7 @@ export default defineConfig({
           "date-fns-jalali": "DateFnsJalali",
           react: "React",
           "react-dom": "ReactDOM",
+          "react/jsx-runtime": "ReactJSXRuntime",
           "react-hook-form": "ReactHookForm",
           "react-imask": "ReactImask",
           stylis: "Stylis",

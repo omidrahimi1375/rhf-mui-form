@@ -54,7 +54,7 @@ export default function RHFCheckBox<T extends FieldValues>({ name, label, contro
       name={name}
       control={control ?? formContext.control}
       render={({ field: { value, onChange, ...field }, fieldState: { error } }) => (
-        <FormControl error={error !== undefined}>
+        <FormControl error={props.disabled !== true && error !== undefined}>
           <FormControlLabel
             control={
               <Checkbox
@@ -68,7 +68,7 @@ export default function RHFCheckBox<T extends FieldValues>({ name, label, contro
             }
             label={label}
           />
-          <FormHelperText>{error?.message ?? " "}</FormHelperText>
+          <FormHelperText>{props.disabled !== true && error !== undefined ? error.message : " "}</FormHelperText>
         </FormControl>
       )}
     />

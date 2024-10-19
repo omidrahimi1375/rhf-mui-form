@@ -82,7 +82,7 @@ export default function RHFRadioGroup<T extends FieldValues>({
               <FormControlLabel key={option.value} value={option.value} control={<Radio />} label={option.label} />
             ))}
           </RadioGroup>
-          <FormHelperText>{error?.message ?? " "}</FormHelperText>
+          <FormHelperText>{error !== undefined ? error.message : " "}</FormHelperText>
         </FormControl>
       )}
     />

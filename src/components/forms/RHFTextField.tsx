@@ -18,6 +18,7 @@ type Props<T extends FieldValues> = Omit<TextFieldProps, "name"> & {
 /**
  * `RHFTextField` is a wrapper around MIUI's `TextField` component that integrates with React Hook Form.
  * It only works with controlled fields in React Hook Form (RHF).
+ * Default value should be an empty string.
  *
  * - The component can either receive the RHF control as a prop or use `useFormContext` to automatically access the form control.
  * - It supports optional `inputDir` to set the text direction (`ltr` or `rtl`), and the `isReadOnly` prop to make the input read-only.

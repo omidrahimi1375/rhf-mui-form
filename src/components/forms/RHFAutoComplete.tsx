@@ -25,12 +25,6 @@ type Props<
   readonly options: OptionItem[];
   /** The control object from React Hook Form, optional if useFormContext is used */
   readonly control?: Control<T>;
-  /** Optional: Specifies the text direction for the input field (left-to-right or right-to-left). */
-  readonly inputDir?: "ltr" | "rtl";
-  /** Optional: Specifies the maximum height of the autocomplete dropdown. */
-  readonly maxHeight?: number;
-  /** Optional: Specifies the maximum height of the dropdown list in the autocomplete. */
-  readonly dropDownMaxHeight?: number;
   /** Optional: Props to be passed to the underlying `TextField` component used in the `renderInput` function. */
   readonly renderInputProps?: Omit<TextFieldProps, "name">;
 };
@@ -53,9 +47,6 @@ type Props<
  * @param {string} label - The label to be displayed for the input field.
  * @param {OptionItem[]} options - The list of options to be shown in the autocomplete dropdown.
  * @param {Control<T>} [control] - The React Hook Form control object. If not provided, `useFormContext` is used to access the form control.
- * @param {"ltr" | "rtl"} [inputDir] - The direction of the text input field.
- * @param {number} [maxHeight] - The maximum height of the autocomplete dropdown.
- * @param {number} [dropDownMaxHeight] - The maximum height of the dropdown list.
  * @param {TextFieldProps} [renderInputProps] - Additional props to pass to the underlying MUI `TextField`.
  * @param {AutocompleteProps<Value, Multiple, DisableClearable, FreeSolo>} props - Additional props passed to the `Autocomplete` component.
  *
@@ -87,15 +78,10 @@ export default function RHFAutoComplete<T extends FieldValues>({
   label,
   options,
   control,
-  inputDir,
-  maxHeight,
-  dropDownMaxHeight,
   renderInputProps,
   ...props
 }: Props<T>): ReactElement {
   const formContext = useFormContext<T>();
-
-  // TODO: Complete maxHeight, dropDownMaxHeight and inputDir
 
   const innerOptions = useMemo(() => {
     const result: Record<string, OptionItem> = {};

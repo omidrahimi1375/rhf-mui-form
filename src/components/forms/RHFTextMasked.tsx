@@ -52,6 +52,7 @@ const TextMaskInput = forwardRef<HTMLInputElement, TextMaskInputProps>(function 
 /**
  * `RHFTextMasked` is a React Hook Form integrated `TextField` component that supports input masking via `react-imask`.
  * This component also provides support for read-only fields and input direction (LTR or RTL).
+ * Default value should be an empty string.
  *
  * - It is integrated with `react-hook-form` using `Controller` to manage form state.
  * - It supports custom masking options via the `maskOptions` prop and can handle right-to-left (RTL) or left-to-right (LTR) input direction.

@@ -97,6 +97,10 @@ export default function RHFSelect<T extends FieldValues>({
     const result: Record<string, OptionItem> = {};
 
     for (const o of options) {
+      if (o.value in result) {
+        console.warn("Duplicate option value for select component: ", o.value);
+      }
+
       result[o.value] = o;
     }
 
@@ -109,11 +113,15 @@ export default function RHFSelect<T extends FieldValues>({
       control={control ?? formContext.control}
       render={({ field: { value, ...field }, fieldState: { error } }) => {
         return (
-          <FormControl fullWidth={true} disabled={props.disabled} error={error !== undefined}>
+          <FormControl
+            fullWidth={true}
+            disabled={props.disabled}
+            error={props.disabled !== true && error !== undefined}
+          >
             <InputLabel>{props.label}</InputLabel>
             <Select
               {...props}
-              error={error !== undefined}
+              error={props.disabled !== true && error !== undefined}
               // eslint-disable-next-line @typescript-eslint/prefer-nullish-coalescing
               value={value === undefined ? (isMultiple ? [] : "") : value}
               {...field}

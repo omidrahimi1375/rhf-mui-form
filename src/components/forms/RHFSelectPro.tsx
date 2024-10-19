@@ -100,7 +100,13 @@ export default function RHFSelectPro<T extends FieldValues>({
     const result: Record<string, OptionItem> = {};
 
     for (const o of options) {
-      result[objectHash(o.value)] = o;
+      const h = objectHash(o.value);
+
+      if (h in result) {
+        console.warn("Duplicate option value for select component: ", o.value);
+      }
+
+      result[h] = o;
     }
 
     return result;
@@ -120,11 +126,15 @@ export default function RHFSelectPro<T extends FieldValues>({
       control={control ?? formContext.control}
       render={({ field: { value: _, onChange, ...field }, fieldState: { error } }) => {
         return (
-          <FormControl fullWidth={true} disabled={props.disabled} error={error !== undefined}>
+          <FormControl
+            fullWidth={true}
+            disabled={props.disabled}
+            error={props.disabled !== true && error !== undefined}
+          >
             <InputLabel>{props.label}</InputLabel>
             <Select
               {...props}
-              error={error !== undefined}
+              error={props.disabled !== true && error !== undefined}
               value={hashedValue}
               {...field}
               onChange={(event) => {
