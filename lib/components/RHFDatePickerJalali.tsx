@@ -52,7 +52,7 @@ type Props<T extends FieldValues> = Omit<DatePickerProps<Date>, "name"> & {
  * />
  * ```
  */
-export default function RHFDatePickerJalali<T extends FieldValues>({
+export function RHFDatePickerJalali<T extends FieldValues>({
   name,
   control,
   isReadOnly,

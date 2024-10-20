@@ -6,9 +6,9 @@ import { Checkbox, MenuItem } from "@mui/material";
 import { FormControl, FormHelperText, InputLabel, Select } from "@mui/material";
 import type { ReactElement } from "react";
 import { useMemo } from "react";
-import objectHash from "object-hash";
-import SelectRenderValue from "./components/SelectRenderValue.tsx";
-import type { NotUndefined, SelectOptionBase } from "./types.ts";
+import { sha1 } from "object-hash";
+import SelectRenderValue from "./partials/SelectRenderValue.tsx";
+import type { NotUndefined, SelectOptionBase } from "../types.ts";
 
 /**
  * Interface defining the structure of an option item in the select field.
@@ -80,7 +80,7 @@ type Props<T extends FieldValues> = Omit<SelectProps, "name"> & {
  * />
  * ```
  */
-export default function RHFSelectPro<T extends FieldValues>({
+export function RHFSelectPro<T extends FieldValues>({
   name,
   options,
   control,
@@ -100,7 +100,7 @@ export default function RHFSelectPro<T extends FieldValues>({
     const result: Record<string, OptionItem> = {};
 
     for (const o of options) {
-      const h = objectHash(o.value);
+      const h = sha1(o.value);
 
       if (h in result) {
         console.warn("Duplicate option value for select component: ", o.value);
@@ -117,7 +117,7 @@ export default function RHFSelectPro<T extends FieldValues>({
       return isMultiple ? [] : "";
     }
 
-    return isMultiple ? (rhfValue as string[]).map((s) => objectHash(s)) : objectHash(rhfValue);
+    return isMultiple ? (rhfValue as string[]).map((s) => sha1(s)) : sha1(rhfValue);
   }, [isMultiple, rhfValue]);
 
   return (

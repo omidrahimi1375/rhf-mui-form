@@ -92,7 +92,7 @@ const TextMaskInput = forwardRef<HTMLInputElement, TextMaskInputProps>(function 
  * />
  * ```
  */
-export default function RHFTextMasked<T extends FieldValues>({
+export function RHFTextMasked<T extends FieldValues>({
   name,
   control,
   maskOptions,

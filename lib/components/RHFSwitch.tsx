@@ -54,7 +54,7 @@ type Props<T extends FieldValues> = Omit<SwitchProps, "name"> & {
  * />
  * ```
  */
-export default function RHFSwitch<T extends FieldValues>({ name, label, control, ...props }: Props<T>): ReactElement {
+export function RHFSwitch<T extends FieldValues>({ name, label, control, ...props }: Props<T>): ReactElement {
   const formContext = useFormContext<T>();
 
   return (

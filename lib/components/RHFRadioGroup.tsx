@@ -61,7 +61,7 @@ type Props<T extends FieldValues> = Omit<RadioGroupProps, "name"> & {
  * />
  * ```
  */
-export default function RHFRadioGroup<T extends FieldValues>({
+export function RHFRadioGroup<T extends FieldValues>({
   name,
   options,
   formLabel,

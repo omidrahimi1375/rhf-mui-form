@@ -5,8 +5,8 @@ import { Checkbox, MenuItem } from "@mui/material";
 import { FormControl, FormHelperText, InputLabel, Select } from "@mui/material";
 import type { ReactElement } from "react";
 import { useMemo } from "react";
-import SelectRenderValue from "./components/SelectRenderValue.tsx";
-import type { SelectOptionBase } from "./types.ts";
+import SelectRenderValue from "./partials/SelectRenderValue.tsx";
+import type { SelectOptionBase } from "../types.ts";
 
 /**
  * Interface defining the structure of an option item in the select field.
@@ -78,7 +78,7 @@ type Props<T extends FieldValues> = Omit<SelectProps, "name"> & {
  * />
  * ```
  */
-export default function RHFSelect<T extends FieldValues>({
+export function RHFSelect<T extends FieldValues>({
   name,
   options,
   control,

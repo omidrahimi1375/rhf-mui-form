@@ -46,7 +46,7 @@ type Props<T extends FieldValues> = Omit<CheckboxProps, "name"> & {
  * />
  * ```
  */
-export default function RHFCheckBox<T extends FieldValues>({ name, label, control, ...props }: Props<T>): ReactElement {
+export function RHFCheckBox<T extends FieldValues>({ name, label, control, ...props }: Props<T>): ReactElement {
   const formContext = useFormContext<T>();
 
   return (

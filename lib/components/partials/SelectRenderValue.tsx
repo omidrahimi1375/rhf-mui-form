@@ -1,6 +1,6 @@
 import type { ReactElement } from "react";
 import { memo } from "react";
-import type { SelectOptionBase } from "../types.ts";
+import type { SelectOptionBase } from "../../types";
 import { Chip, Stack } from "@mui/material";
 
 interface Props {

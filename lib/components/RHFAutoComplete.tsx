@@ -4,7 +4,7 @@ import type { AutocompleteProps, TextFieldProps } from "@mui/material";
 import { Autocomplete, TextField } from "@mui/material";
 import type { ReactElement } from "react";
 import { useMemo } from "react";
-import type { SelectOptionBase } from "./types.ts";
+import type { SelectOptionBase } from "../types.ts";
 
 interface OptionItem extends SelectOptionBase {
   value: string;
@@ -73,7 +73,7 @@ type Props<
  * />
  * ```
  */
-export default function RHFAutoComplete<T extends FieldValues>({
+export function RHFAutoComplete<T extends FieldValues>({
   name,
   label,
   options,

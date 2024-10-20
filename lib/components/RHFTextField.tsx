@@ -54,7 +54,7 @@ type Props<T extends FieldValues> = Omit<TextFieldProps, "name"> & {
  * />
  * ```
  */
-export default function RHFTextField<T extends FieldValues>({
+export function RHFTextField<T extends FieldValues>({
   name,
   control,
   inputDir,
