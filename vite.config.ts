@@ -19,8 +19,9 @@ export default defineConfig({
     copyPublicDir: false,
     lib: {
       entry: resolve(__dirname, "lib/index.ts"),
-      formats: ["es", "cjs", "umd", "iife"],
-      fileName: (format) => `index.${format}.js`
+      formats: ["es"],
+      fileName: "index"
+      // fileName: (format) => `index.${format}.js`
     },
     rollupOptions: {
       external: [
