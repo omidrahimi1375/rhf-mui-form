@@ -76,8 +76,6 @@ pnpm add @paratco/rhf-mui-form
   `RHFAutoComplete` is a reusable autocomplete component integrated with React Hook Form.
 
   - Supports single or multiple option selections based on the `Autocomplete` component.
-  - Handles various input props such as `inputDir`, dropdown height, and form validation.
-  - Uses `useMemo` to optimize the rendering of option values in the dropdown.
 
   ```tsx
   <RHFAutoComplete
@@ -91,8 +89,6 @@ pnpm add @paratco/rhf-mui-form
   Types:
 
   ```ts
-  export type NotUndefined = object | string | number | boolean | null | NotUndefined[];
-
   export interface SelectOptionBase {
     label: string;
     value: unknown;
