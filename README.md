@@ -1,16 +1,14 @@
-# Table of Contents
-
-- [RHF Mui Form](#rhf-mui-form)
-- [Features](#features)
-- [Example](#example)
-
-
-
-## RHF Mui Form
+# RHF Mui Form
 
   This repository contains a custom form component built using React Hook Form (RHF) and Material-UI (MUI).
 
   It allows for form-controlled selection of options via React Hook Form's `Controller` component.
+
+## Table of Contents
+
+- [Features](#features)
+- [Example](#example)
+
 
 ## Installation
 To install, you can use npm or yarn or pnpm:
