@@ -1071,9 +1071,18 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@paratco/mui-form@workspace:.":
+"@paratco/prettier-config@npm:^0.1.1":
+  version: 0.1.1
+  resolution: "@paratco/prettier-config@npm:0.1.1"
+  peerDependencies:
+    prettier: ^3.3.2
+  checksum: 10c0/ca04b47d3cdfa29eb5e9ae348c0dc702dc6b83a5e8e4bd0165286577a9f0cfeffcffdd8945bfb491baf5576a90519ee4a2cc85b81f56bf871ab4c99b2e9d51e0
+  languageName: node
+  linkType: hard
+
+"@paratco/rhf-mui-form@workspace:.":
   version: 0.0.0-use.local
-  resolution: "@paratco/mui-form@workspace:."
+  resolution: "@paratco/rhf-mui-form@workspace:."
   dependencies:
     "@emotion/react": "npm:^11.13.3"
     "@emotion/styled": "npm:^11.13.0"
@@ -1122,15 +1131,6 @@ __metadata:
       optional: true
   languageName: unknown
   linkType: soft
-
-"@paratco/prettier-config@npm:^0.1.1":
-  version: 0.1.1
-  resolution: "@paratco/prettier-config@npm:0.1.1"
-  peerDependencies:
-    prettier: ^3.3.2
-  checksum: 10c0/ca04b47d3cdfa29eb5e9ae348c0dc702dc6b83a5e8e4bd0165286577a9f0cfeffcffdd8945bfb491baf5576a90519ee4a2cc85b81f56bf871ab4c99b2e9d51e0
-  languageName: node
-  linkType: hard
 
 "@pkgjs/parseargs@npm:^0.11.0":
   version: 0.11.0

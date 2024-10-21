@@ -1,10 +1,9 @@
 {
-  "name": "@paratco/mui-form",
+  "name": "@paratco/rhf-mui-form",
   "version": "1.0.0",
   "description": "MUI + React Hook Form Reusable Form Components",
   "author": "Paratco",
   "license": "ISC",
-  "private": false,
   "repository": {
     "type": "git",
     "url": "https://github.com/Paratco/mui-form.git"
