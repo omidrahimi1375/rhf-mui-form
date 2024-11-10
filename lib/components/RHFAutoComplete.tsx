@@ -2,7 +2,7 @@ import type { Control, FieldValues, Path } from "react-hook-form";
 import { Controller, useFormContext } from "react-hook-form";
 import type { AutocompleteProps, TextFieldProps } from "@mui/material";
 import { Autocomplete, TextField } from "@mui/material";
-import type { ReactElement } from "react";
+import type { ReactElement, ReactNode } from "react";
 import { useMemo } from "react";
 import type { SelectOptionBase } from "../types.ts";
 
@@ -20,7 +20,7 @@ type Props<
   /** The name of the field in the form state */
   readonly name: Path<T>;
   /** The label for the input field, which will be displayed as a floating label. */
-  readonly label: string;
+  readonly label: ReactNode;
   /** The options to be displayed in the autocomplete dropdown. */
   readonly options: OptionItem[];
   /** The control object from React Hook Form, optional if useFormContext is used */
