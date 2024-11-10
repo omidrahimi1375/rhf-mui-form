@@ -13,10 +13,10 @@ interface OptionItem extends SelectOptionBase {
 type Props<
   T extends FieldValues,
   Value = OptionItem,
-  Multiple extends boolean | undefined = undefined,
+  Multiple extends boolean | undefined = false,
   DisableClearable extends boolean | undefined = false,
   FreeSolo extends boolean | undefined = false
-> = Omit<AutocompleteProps<Value, Multiple, DisableClearable, FreeSolo>, "name" | "renderInput"> & {
+> = Omit<AutocompleteProps<Value, Multiple, DisableClearable, FreeSolo>, "name" | "renderInput" | "multiple"> & {
   /** The name of the field in the form state */
   readonly name: Path<T>;
   /** The label for the input field, which will be displayed as a floating label. */
@@ -27,6 +27,8 @@ type Props<
   readonly control?: Control<T>;
   /** Optional: Props to be passed to the underlying `TextField` component used in the `renderInput` function. */
   readonly renderInputProps?: Omit<TextFieldProps, "name">;
+  /** Optional: To support single or multiple selections */
+  readonly multiple?: boolean;
 };
 
 /**
@@ -48,6 +50,7 @@ type Props<
  * @param {OptionItem[]} options - The list of options to be shown in the autocomplete dropdown.
  * @param {Control<T>} [control] - The React Hook Form control object. If not provided, `useFormContext` is used to access the form control.
  * @param {TextFieldProps} [renderInputProps] - Additional props to pass to the underlying MUI `TextField`.
+ * @param {boolean} [multiple] - To support single or multiple selections.
  * @param {AutocompleteProps<Value, Multiple, DisableClearable, FreeSolo>} props - Additional props passed to the `Autocomplete` component.
  *
  * @returns {ReactElement} A controlled `Autocomplete` component integrated with React Hook Form.
@@ -79,6 +82,7 @@ export function RHFAutoComplete<T extends FieldValues>({
   options,
   control,
   renderInputProps,
+  multiple,
   ...props
 }: Props<T>): ReactElement {
   const formContext = useFormContext<T>();
@@ -100,6 +104,9 @@ export function RHFAutoComplete<T extends FieldValues>({
       render={({ field: { onChange, value, ref }, fieldState: { error } }) => (
         <Autocomplete
           fullWidth={true}
+          // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+          // @ts-expect-error
+          multiple={multiple}
           {...props}
           value={value !== undefined && value !== null ? innerOptions[value] : null}
           onChange={(_, newValue) => {
