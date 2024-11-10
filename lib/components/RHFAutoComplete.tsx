@@ -12,10 +12,10 @@ interface OptionItem extends SelectOptionBase {
 
 type Props<
   T extends FieldValues,
-  Value = OptionItem,
-  Multiple extends boolean | undefined = false,
-  DisableClearable extends boolean | undefined = false,
-  FreeSolo extends boolean | undefined = false
+  Value extends OptionItem,
+  Multiple extends boolean,
+  DisableClearable extends boolean,
+  FreeSolo extends boolean
 > = Omit<AutocompleteProps<Value, Multiple, DisableClearable, FreeSolo>, "name" | "renderInput" | "multiple"> & {
   /** The name of the field in the form state */
   readonly name: Path<T>;
@@ -76,7 +76,13 @@ type Props<
  * />
  * ```
  */
-export function RHFAutoComplete<T extends FieldValues>({
+export function RHFAutoComplete<
+  T extends FieldValues,
+  Value extends OptionItem = OptionItem,
+  Multiple extends boolean = false,
+  DisableClearable extends boolean = false,
+  FreeSolo extends boolean = false
+>({
   name,
   label,
   options,
@@ -84,7 +90,7 @@ export function RHFAutoComplete<T extends FieldValues>({
   renderInputProps,
   multiple,
   ...props
-}: Props<T>): ReactElement {
+}: Props<T, Value, Multiple, DisableClearable, FreeSolo>): ReactElement {
   const formContext = useFormContext<T>();
 
   const innerOptions = useMemo(() => {
@@ -102,17 +108,31 @@ export function RHFAutoComplete<T extends FieldValues>({
       name={name}
       control={control ?? formContext.control}
       render={({ field: { onChange, value, ref }, fieldState: { error } }) => (
-        <Autocomplete
+        <Autocomplete<Value, Multiple, DisableClearable, FreeSolo>
           fullWidth={true}
           // eslint-disable-next-line @typescript-eslint/ban-ts-comment
           // @ts-expect-error
           multiple={multiple}
           {...props}
-          value={value !== undefined && value !== null ? innerOptions[value] : null}
+          // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+          // @ts-expect-error
+          value={
+            value !== undefined && value !== null
+              ? multiple === true
+                ? (value as string[]).map((v) => innerOptions[v])
+                : innerOptions[value]
+              : multiple === true
+                ? []
+                : null
+          }
           onChange={(_, newValue) => {
-            onChange(newValue !== null ? newValue.value : null);
+            if (multiple === true) {
+              onChange((newValue as OptionItem[]).map((n) => n.value));
+            } else {
+              onChange(newValue !== null ? (newValue as OptionItem).value : null);
+            }
           }}
-          getOptionLabel={(option) => option.label}
+          getOptionLabel={(option) => (option as OptionItem).label}
           options={options}
           isOptionEqualToValue={(option, val) => {
             return option.value === val.value;
