@@ -144,7 +144,6 @@ export function RHFTextMasked<T extends FieldValues>({
             },
             htmlInput: {
               ...props.slotProps?.htmlInput,
-              // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
               style: {
                 direction: inputDir,
                 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
