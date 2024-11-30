@@ -2,7 +2,7 @@ import type { Control, FieldValues, Path } from "react-hook-form";
 import { Controller, useFormContext } from "react-hook-form";
 import type { DateTimePickerProps } from "@mui/x-date-pickers";
 import { DateTimePicker, LocalizationProvider, renderTimeViewClock } from "@mui/x-date-pickers";
-import { AdapterDateFnsJalali } from "@mui/x-date-pickers/AdapterDateFnsJalali";
+import { AdapterDateFnsJalali } from "@mui/x-date-pickers/AdapterDateFnsJalaliV3";
 import type { ReactElement } from "react";
 
 type Props<T extends FieldValues> = Omit<DateTimePickerProps<Date>, "name"> & {
