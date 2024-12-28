@@ -17,7 +17,7 @@ interface ChipsProps {
 
 function Chips({ options, selected }: ChipsProps): ReactElement | ReactElement[] {
   return selected.map((s) => {
-    return <Chip key={s} label={options[s].label} />;
+    return <Chip key={s} label={options[s].label} size="small" />;
   });
 }
 
