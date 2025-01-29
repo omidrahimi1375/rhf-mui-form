@@ -149,6 +149,7 @@ export function RHFSelectPro<T extends FieldValues>({
                 slotProps: {
                   ...props.MenuProps?.slotProps,
                   paper: {
+                    // eslint-disable-next-line @typescript-eslint/no-misused-spread
                     ...props.MenuProps?.slotProps?.paper,
                     // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
                     style: {

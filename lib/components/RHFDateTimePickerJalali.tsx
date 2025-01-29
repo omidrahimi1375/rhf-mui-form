@@ -69,6 +69,7 @@ export function RHFDateTimePickerJalali<T extends FieldValues>({
         <LocalizationProvider dateAdapter={AdapterDateFnsJalali}>
           <DateTimePicker
             {...props}
+            // eslint-disable-next-line @typescript-eslint/no-misused-spread
             sx={{ width: "100%", ...props.sx }}
             viewRenderers={{
               hours: renderTimeViewClock,
@@ -78,10 +79,12 @@ export function RHFDateTimePickerJalali<T extends FieldValues>({
             slotProps={{
               ...props.slotProps,
               field: {
+                // eslint-disable-next-line @typescript-eslint/no-misused-spread
                 ...props.slotProps?.field,
                 readOnly: isReadOnly
               },
               textField: {
+                // eslint-disable-next-line @typescript-eslint/no-misused-spread
                 ...props.slotProps?.textField,
                 error: error !== undefined,
                 // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
