@@ -124,6 +124,7 @@ export function RHFTextMasked<T extends FieldValues>({
             ...props.slotProps,
             input: {
               readOnly: isReadOnly,
+              // eslint-disable-next-line @typescript-eslint/no-misused-spread
               ...props.slotProps?.input,
               inputComponent: TextMaskInput,
               // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
@@ -143,6 +144,7 @@ export function RHFTextMasked<T extends FieldValues>({
               }
             },
             htmlInput: {
+              // eslint-disable-next-line @typescript-eslint/no-misused-spread
               ...props.slotProps?.htmlInput,
               style: {
                 direction: inputDir,

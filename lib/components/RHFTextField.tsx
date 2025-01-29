@@ -85,9 +85,11 @@ export function RHFTextField<T extends FieldValues>({
             ...props.slotProps,
             input: {
               readOnly: isReadOnly,
+              // eslint-disable-next-line @typescript-eslint/no-misused-spread
               ...props.slotProps?.input
             },
             htmlInput: {
+              // eslint-disable-next-line @typescript-eslint/no-misused-spread
               ...props.slotProps?.htmlInput,
               style: {
                 direction: inputDir,
