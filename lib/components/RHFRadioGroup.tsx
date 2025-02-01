@@ -7,6 +7,7 @@ import { Controller, useFormContext } from "react-hook-form";
 interface OptionItem {
   label: string;
   value: string;
+  disabled?: boolean;
 }
 
 type Props<T extends FieldValues> = Omit<RadioGroupProps, "name"> & {
@@ -79,7 +80,13 @@ export function RHFRadioGroup<T extends FieldValues>({
           {formLabel ?? null}
           <RadioGroup {...props} {...field}>
             {options.map((option) => (
-              <FormControlLabel key={option.value} value={option.value} control={<Radio />} label={option.label} />
+              <FormControlLabel
+                key={option.value}
+                value={option.value}
+                control={<Radio />}
+                label={option.label}
+                disabled={option.disabled}
+              />
             ))}
           </RadioGroup>
           <FormHelperText>{error !== undefined ? error.message : " "}</FormHelperText>
