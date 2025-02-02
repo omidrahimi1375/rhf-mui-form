@@ -104,11 +104,13 @@ export function RHFSelect<T extends FieldValues>({
     const uncategorized: OptionItem[] = [];
 
     for (const option of options) {
-      if (option.category) {
-        if (!categories[option.category]) {
-          categories[option.category] = [];
+      const category = option.category ?? ""; // Ensure it's a string
+
+      if (category !== "") {
+        if (!Object.prototype.hasOwnProperty.call(categories, category)) {
+          categories[category] = [];
         }
-        categories[option.category].push(option);
+        categories[category].push(option);
       } else {
         uncategorized.push(option);
       }
@@ -182,17 +184,27 @@ export function RHFSelect<T extends FieldValues>({
                     : undefined
               }
             >
-              {categorized
+              {categorized === true
                 ? isMultiple
                   ? Object.entries(groupedOptions.categories)
                       .map(([category, categoryOptions]) => [
                         <ListSubheader key={category}>{category}</ListSubheader>,
-                        ...categoryOptions.map((option) => (
-                          <MenuItem key={option.value} value={option.value} disabled={option.disabled} dir={inputDir}>
-                            <Checkbox checked={Array.isArray(value) && value.includes(option.value)} />
-                            {option.label}
-                          </MenuItem>
-                        ))
+                        ...categoryOptions.map(
+                          (
+                            option
+                          ) => (
+                            <MenuItem key={option.value} value={option.value} disabled={option.disabled} dir={inputDir}>
+                              <Checkbox
+                                checked={
+                                  Array.isArray(value) &&
+                                  (value as (string | number)[]).includes(option.value as string | number)
+                                }
+                              />
+
+                              {option.label}
+                            </MenuItem>
+                          )
+                        )
                       ])
                       .concat(
                         groupedOptions.uncategorized.length > 0
@@ -205,7 +217,12 @@ export function RHFSelect<T extends FieldValues>({
                                   disabled={option.disabled}
                                   dir={inputDir}
                                 >
-                                  <Checkbox checked={Array.isArray(value) && value.includes(option.value)} />
+                                  <Checkbox
+                                    checked={
+                                      Array.isArray(value) &&
+                                      (value as (string | number)[]).includes(option.value as string | number)
+                                    }
+                                  />
                                   {option.label}
                                 </MenuItem>
                               ))
@@ -223,7 +240,12 @@ export function RHFSelect<T extends FieldValues>({
                 : isMultiple
                   ? Object.entries(innerOptions).map(([hash, option]) => (
                       <MenuItem value={hash} key={hash} disabled={option.disabled} dir={inputDir}>
-                        <Checkbox checked={Array.isArray(value) && value.includes(hash)} />
+                        <Checkbox
+                          checked={
+                            Array.isArray(value) &&
+                            (value as (string | number)[]).includes(option.value as string | number)
+                          }
+                        />
                         {option.label}
                       </MenuItem>
                     ))
