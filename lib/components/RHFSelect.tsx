@@ -194,7 +194,9 @@ export function RHFSelect<T extends FieldValues>({
                   ? Object.entries(groupedOptions.categories)
                       .map(([category, categoryOptions]) => [
                         // <ListSubheader key={category}>{category}</ListSubheader>,
-                        <ListSubheader key={category}>{groupedOptions.categories[category][0].category?.label ?? 'Uncategorized'}</ListSubheader>,
+                        <ListSubheader key={category}>
+                          {groupedOptions.categories[category][0].category?.label ?? "Uncategorized"}
+                        </ListSubheader>,
                         ...categoryOptions.map((option) => (
                           <MenuItem key={option.value} value={option.value} disabled={option.disabled} dir={inputDir}>
                             <Checkbox
@@ -233,7 +235,9 @@ export function RHFSelect<T extends FieldValues>({
                       )
                   : Object.entries(groupedOptions.categories).map(([category, categoryOptions]) => [
                       // <ListSubheader key={category}>{category}</ListSubheader>,
-                      <ListSubheader key={category}>{groupedOptions.categories[category][0].category?.label ?? 'Uncategorized'}</ListSubheader>,
+                      <ListSubheader key={category}>
+                        {groupedOptions.categories[category][0].category?.label ?? "Uncategorized"}
+                      </ListSubheader>,
                       ...categoryOptions.map((option) => (
                         <MenuItem key={option.value} value={option.value} disabled={option.disabled} dir={inputDir}>
                           {option.label}
