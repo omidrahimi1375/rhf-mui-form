@@ -8,6 +8,11 @@ import { useMemo } from "react";
 import SelectRenderValue from "./partials/SelectRenderValue.tsx";
 import type { SelectOptionBase } from "../types.ts";
 
+interface Category {
+  label: string;
+  value: string;
+}
+
 /**
  * Interface defining the structure of an option item in the select field.
  * @extends SelectOptionBase - Base interface for the select options.
@@ -16,7 +21,7 @@ interface OptionItem extends SelectOptionBase {
   /** The value of the option, which is used as the key */
   value: string;
   /** An optional category for grouping options */
-  category?: string;
+  category?: Category;
 }
 
 type Props<T extends FieldValues> = Omit<SelectProps, "name"> & {
@@ -104,13 +109,13 @@ export function RHFSelect<T extends FieldValues>({
     const uncategorized: OptionItem[] = [];
 
     for (const option of options) {
-      const category = option.category ?? ""; // Ensure it's a string
+      const categoryValue = option.category?.value ?? ""; // Ensure it's a string
 
-      if (category !== "") {
-        if (!Object.prototype.hasOwnProperty.call(categories, category)) {
-          categories[category] = [];
+      if (categoryValue !== "") {
+        if (!Object.prototype.hasOwnProperty.call(categories, categoryValue)) {
+          categories[categoryValue] = [];
         }
-        categories[category].push(option);
+        categories[categoryValue].push(option);
       } else {
         uncategorized.push(option);
       }
@@ -188,7 +193,8 @@ export function RHFSelect<T extends FieldValues>({
                 ? isMultiple
                   ? Object.entries(groupedOptions.categories)
                       .map(([category, categoryOptions]) => [
-                        <ListSubheader key={category}>{category}</ListSubheader>,
+                        // <ListSubheader key={category}>{category}</ListSubheader>,
+                        <ListSubheader key={category}>{groupedOptions.categories[category][0].category?.label ?? 'Uncategorized'}</ListSubheader>,
                         ...categoryOptions.map((option) => (
                           <MenuItem key={option.value} value={option.value} disabled={option.disabled} dir={inputDir}>
                             <Checkbox
@@ -226,7 +232,8 @@ export function RHFSelect<T extends FieldValues>({
                           : []
                       )
                   : Object.entries(groupedOptions.categories).map(([category, categoryOptions]) => [
-                      <ListSubheader key={category}>{category}</ListSubheader>,
+                      // <ListSubheader key={category}>{category}</ListSubheader>,
+                      <ListSubheader key={category}>{groupedOptions.categories[category][0].category?.label ?? 'Uncategorized'}</ListSubheader>,
                       ...categoryOptions.map((option) => (
                         <MenuItem key={option.value} value={option.value} disabled={option.disabled} dir={inputDir}>
                           {option.label}
