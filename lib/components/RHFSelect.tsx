@@ -1,17 +1,12 @@
 import type { Control, FieldValues, Path } from "react-hook-form";
 import { Controller, useFormContext } from "react-hook-form";
 import type { SelectProps } from "@mui/material";
-import { Checkbox, ListSubheader, MenuItem } from "@mui/material";
+import { Checkbox, MenuItem } from "@mui/material";
 import { FormControl, FormHelperText, InputLabel, Select } from "@mui/material";
 import type { ReactElement } from "react";
 import { useMemo } from "react";
 import SelectRenderValue from "./partials/SelectRenderValue.tsx";
 import type { SelectOptionBase } from "../types.ts";
-
-interface Category {
-  label: string;
-  value: string;
-}
 
 /**
  * Interface defining the structure of an option item in the select field.
@@ -20,8 +15,6 @@ interface Category {
 interface OptionItem extends SelectOptionBase {
   /** The value of the option, which is used as the key */
   value: string;
-  /** An optional category for grouping options */
-  category?: Category;
 }
 
 type Props<T extends FieldValues> = Omit<SelectProps, "name"> & {
@@ -37,8 +30,6 @@ type Props<T extends FieldValues> = Omit<SelectProps, "name"> & {
   readonly maxHeight?: number;
   /** The maximum height of the dropdown menu */
   readonly dropDownMaxHeight?: number;
-  /** If true, the options will be grouped by category */
-  readonly categorized?: boolean;
 };
 
 /**
@@ -94,7 +85,6 @@ export function RHFSelect<T extends FieldValues>({
   inputDir,
   maxHeight,
   dropDownMaxHeight,
-  categorized,
   ...props
 }: Props<T>): ReactElement {
   const formContext = useFormContext<T>();
@@ -102,27 +92,6 @@ export function RHFSelect<T extends FieldValues>({
   const isMultiple = useMemo(() => {
     return props.multiple === true;
   }, [props.multiple]);
-
-  /** Group options by category */
-  const groupedOptions = useMemo(() => {
-    const categories: Record<string, OptionItem[]> = {};
-    const uncategorized: OptionItem[] = [];
-
-    for (const option of options) {
-      const categoryValue = option.category?.value ?? ""; // Ensure it's a string
-
-      if (categoryValue !== "") {
-        if (!Object.prototype.hasOwnProperty.call(categories, categoryValue)) {
-          categories[categoryValue] = [];
-        }
-        categories[categoryValue].push(option);
-      } else {
-        uncategorized.push(option);
-      }
-    }
-
-    return { categories, uncategorized };
-  }, [options]);
 
   const innerOptions = useMemo(() => {
     const result: Record<string, OptionItem> = {};
@@ -189,78 +158,18 @@ export function RHFSelect<T extends FieldValues>({
                     : undefined
               }
             >
-              {categorized === true
-                ? isMultiple
-                  ? Object.entries(groupedOptions.categories)
-                      .map(([category, categoryOptions]) => [
-                        // <ListSubheader key={category}>{category}</ListSubheader>,
-                        <ListSubheader key={category}>
-                          {groupedOptions.categories[category][0].category?.label ?? "Uncategorized"}
-                        </ListSubheader>,
-                        ...categoryOptions.map((option) => (
-                          <MenuItem key={option.value} value={option.value} disabled={option.disabled} dir={inputDir}>
-                            <Checkbox
-                              checked={
-                                Array.isArray(value) &&
-                                (value as (string | number)[]).includes(option.value as string | number)
-                              }
-                            />
-
-                            {option.label}
-                          </MenuItem>
-                        ))
-                      ])
-                      .concat(
-                        groupedOptions.uncategorized.length > 0
-                          ? [
-                              <ListSubheader key="uncategorized">Uncategorized</ListSubheader>,
-                              ...groupedOptions.uncategorized.map((option) => (
-                                <MenuItem
-                                  key={option.value}
-                                  value={option.value}
-                                  disabled={option.disabled}
-                                  dir={inputDir}
-                                >
-                                  <Checkbox
-                                    checked={
-                                      Array.isArray(value) &&
-                                      (value as (string | number)[]).includes(option.value as string | number)
-                                    }
-                                  />
-                                  {option.label}
-                                </MenuItem>
-                              ))
-                            ]
-                          : []
-                      )
-                  : Object.entries(groupedOptions.categories).map(([category, categoryOptions]) => [
-                      // <ListSubheader key={category}>{category}</ListSubheader>,
-                      <ListSubheader key={category}>
-                        {groupedOptions.categories[category][0].category?.label ?? "Uncategorized"}
-                      </ListSubheader>,
-                      ...categoryOptions.map((option) => (
-                        <MenuItem key={option.value} value={option.value} disabled={option.disabled} dir={inputDir}>
-                          {option.label}
-                        </MenuItem>
-                      ))
-                    ])
-                : isMultiple
-                  ? Object.entries(innerOptions).map(([hash, option]) => (
-                      <MenuItem value={hash} key={hash} disabled={option.disabled} dir={inputDir}>
-                        <Checkbox
-                          checked={
-                            Array.isArray(value) &&
-                            (value as (string | number)[]).includes(option.value as string | number)
-                          }
-                        />
-                        {option.label}
-                      </MenuItem>
-                    ))
-                  : Object.entries(innerOptions).map(([hash, option]) => (
-                      <MenuItem value={hash} key={hash} disabled={option.disabled} dir={inputDir}>
-                        {option.label}
-                      </MenuItem>
-                    ))}
+              {isMultiple
+                ? Object.entries(innerOptions).map(([hash, option]) => (
+                    <MenuItem value={hash} key={hash} disabled={option.disabled} dir={inputDir}>
+                      <Checkbox checked={(value as string[]).includes(hash)} />
+                      {option.label}
+                    </MenuItem>
+                  ))
+                : Object.entries(innerOptions).map(([hash, option]) => (
+                    <MenuItem value={hash} key={hash} disabled={option.disabled} dir={inputDir}>
+                      {option.label}
+                    </MenuItem>
+                  ))}
             </Select>
             <FormHelperText>{error?.message ?? " "}</FormHelperText>
           </FormControl>
