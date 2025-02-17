@@ -631,12 +631,14 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@hookform/resolvers@npm:^3.10.0":
-  version: 3.10.0
-  resolution: "@hookform/resolvers@npm:3.10.0"
+"@hookform/resolvers@npm:^4.1.0":
+  version: 4.1.0
+  resolution: "@hookform/resolvers@npm:4.1.0"
+  dependencies:
+    caniuse-lite: "npm:^1.0.30001698"
   peerDependencies:
     react-hook-form: ^7.0.0
-  checksum: 10c0/7ee44533b4cdc28c4fa2a94894c735411e5a1f830f4a617c580533321a9b901df0cc8c1e2fad81ad8d55154ebc5cb844cf9c116a3148ffae2bc48758c33cbb8e
+  checksum: 10c0/aeb5c0037c49a9bf0b2026e9c28769ba33a9a8d73223319dd576b35e2e5906f062f17b358ea2d0193482805ccd8918e4f97f3924fc94a1fdfe09de3e255a8c39
   languageName: node
   linkType: hard
 
@@ -1118,7 +1120,7 @@ __metadata:
   dependencies:
     "@emotion/react": "npm:^11.14.0"
     "@emotion/styled": "npm:^11.14.0"
-    "@hookform/resolvers": "npm:^3.10.0"
+    "@hookform/resolvers": "npm:^4.1.0"
     "@mui/material": "npm:^6.4.1"
     "@mui/x-date-pickers": "npm:^7.24.1"
     "@paratco/eslint-config": "npm:^1.0.10"
@@ -2155,6 +2157,13 @@ __metadata:
   version: 1.0.30001696
   resolution: "caniuse-lite@npm:1.0.30001696"
   checksum: 10c0/8060584c612b2bc232995a6e31153432de7946b5417d3b3505a3ab76e632e5568ccc7bae38f1a977f21d4fc214f9e64be829213f810694172c9109e258cb5be8
+  languageName: node
+  linkType: hard
+
+"caniuse-lite@npm:^1.0.30001698":
+  version: 1.0.30001700
+  resolution: "caniuse-lite@npm:1.0.30001700"
+  checksum: 10c0/3d391bcdd193208166d3ad759de240b9c18ac3759dbd57195770f0fcd2eedcd47d5e853609aba1eee5a2def44b0a14eee457796bdb3451a27de0c8b27355017c
   languageName: node
   linkType: hard
 
