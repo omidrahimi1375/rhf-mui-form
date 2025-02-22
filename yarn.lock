@@ -607,7 +607,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@eslint/js@npm:*, @eslint/js@npm:9.21.0, @eslint/js@npm:^9.21.0":
+"@eslint/js@npm:9.21.0, @eslint/js@npm:^9.21.0":
   version: 9.21.0
   resolution: "@eslint/js@npm:9.21.0"
   checksum: 10c0/86c24a2668808995037e3f40c758335df2ae277c553ac0cf84381a1a8698f3099d8a22dd9c388947e6b7f93fcc1142f62406072faaa2b83c43ca79993fc01bb3
@@ -1057,13 +1057,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@paratco/eslint-config@npm:^1.0.13":
-  version: 1.0.13
-  resolution: "@paratco/eslint-config@npm:1.0.13"
+"@paratco/eslint-config@npm:^1.0.14":
+  version: 1.0.14
+  resolution: "@paratco/eslint-config@npm:1.0.14"
   dependencies:
     "@eslint/js": "npm:^9.21.0"
     "@stylistic/eslint-plugin": "npm:^4.0.1"
-    "@types/eslint__js": "npm:^9.14.0"
     eslint: "npm:^9.21.0"
     eslint-config-prettier: "npm:^10.0.1"
     eslint-import-resolver-typescript: "npm:^3.8.3"
@@ -1081,7 +1080,7 @@ __metadata:
   dependenciesMeta:
     prettier:
       optional: true
-  checksum: 10c0/140a6080eb18a7ed914e271f7a4488c06bf73cd3867f6156be3f98b86e9e6e0576da9f4c3ba1c9feb9038a2c560b4bda06ec58bd912168570bad0a4e3bf1f55d
+  checksum: 10c0/002f1542a890b6bd2523722d6fc1ed5577c624c2d6d7b933511a013a6093117fd44caea970b4ea7ff16372b11399b047c955d0ad37d9685d45de9a9f592aaa6b
   languageName: node
   linkType: hard
 
@@ -1103,7 +1102,7 @@ __metadata:
     "@hookform/resolvers": "npm:^4.1.0"
     "@mui/material": "npm:^6.4.5"
     "@mui/x-date-pickers": "npm:^7.27.0"
-    "@paratco/eslint-config": "npm:^1.0.13"
+    "@paratco/eslint-config": "npm:^1.0.14"
     "@paratco/prettier-config": "npm:^0.1.1"
     "@types/node": "npm:^22.13.5"
     "@types/object-hash": "npm:^3.0.6"
@@ -1434,15 +1433,6 @@ __metadata:
   version: 0.0.9
   resolution: "@types/doctrine@npm:0.0.9"
   checksum: 10c0/cdaca493f13c321cf0cacd1973efc0ae74569633145d9e6fc1128f32217a6968c33bea1f858275239fe90c98f3be57ec8f452b416a9ff48b8e8c1098b20fa51c
-  languageName: node
-  linkType: hard
-
-"@types/eslint__js@npm:^9.14.0":
-  version: 9.14.0
-  resolution: "@types/eslint__js@npm:9.14.0"
-  dependencies:
-    "@eslint/js": "npm:*"
-  checksum: 10c0/da5e315aaf17a3e038eff3a4e1b90e360d9d22319653f43f746ad4b7f90dca2d1f8e0ea08f4d02b1b426e7baeb15610be4a30b64d28d16ef06d2feb75c549dc1
   languageName: node
   linkType: hard
 
