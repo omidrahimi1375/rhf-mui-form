@@ -10,10 +10,10 @@ import { IMaskInput } from "react-imask";
 type Props<T extends FieldValues> = Omit<TextFieldProps, "name"> & {
   /** The name of the field in the form state */
   readonly name: Path<T>;
+  /** Masking options for the input, following `react-imask` options */
+  readonly maskOptions: ReactMaskOpts;
   /** The control object from React Hook Form, optional if useFormContext is used */
   readonly control?: Control<T>;
-  /** Masking options for the input, following `react-imask` options */
-  readonly maskOptions?: ReactMaskOpts;
   /** Direction of the text input (left-to-right or right-to-left) */
   readonly inputDir?: "ltr" | "rtl";
   /** Whether the field is read-only */
@@ -24,7 +24,7 @@ interface TextMaskInputProps extends Omit<InputBaseComponentProps, "onChange"> {
   /** The name of the field in the form state */
   readonly name: string;
   /** Masking options for the input */
-  readonly maskOptions?: ReactMaskOpts;
+  readonly maskOptions: ReactMaskOpts;
   /** Change handler for the input field */
   readonly onChange: (event: { target: { name: string; value: string } }) => void;
 }
