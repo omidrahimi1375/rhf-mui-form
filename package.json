@@ -1,6 +1,6 @@
 {
   "name": "@paratco/rhf-mui-form",
-  "version": "1.1.4",
+  "version": "1.1.5",
   "description": "MUI + React Hook Form Reusable Form Components",
   "author": "Paratco",
   "license": "ISC",
@@ -38,7 +38,7 @@
     "date-fns-jalali": "^4.0.0-0",
     "react": "^18.3.0 || ^19.0.0",
     "react-dom": "^18.3.0 || ^19.0.0",
-    "react-hook-form": "^7.54.0",
+    "react-hook-form": "^7.55.0",
     "react-imask": "^7.6.0"
   },
   "peerDependenciesMeta": {
@@ -69,7 +69,7 @@
     "@types/react-dom": "^19.1.1",
     "@types/stylis": "^4.2.7",
     "@vitejs/plugin-react": "^4.3.4",
-    "date-fns-jalali": "^4.1.0-0",
+    "date-fns-jalali": "^4.0.0-0",
     "eslint": "^9.24.0",
     "globals": "^16.0.0",
     "prettier": "^3.5.3",
