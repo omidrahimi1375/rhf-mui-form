@@ -23,17 +23,14 @@ jobs:
           node-version: 22
           check-latest: 'true'
 
-      - name: Enable npm
-        run: corepack enable
-
       - name: Install dependencies
         run: npm install
 
       - name: Prettier
-        run: npm format:check
+        run: npm run format:check
 
       - name: Lint
-        run: npm lint
+        run: npm run lint
 
       - name: Check build
-        run: npm build:check
+        run: npm run build:check
